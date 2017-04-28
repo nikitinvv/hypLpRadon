@@ -1,0 +1,3 @@
+include src/*cuh
+include src/*.i
+include README

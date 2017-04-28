@@ -1,0 +1,110 @@
+/*interface*/
+%module lpRgpu
+
+%{
+#define SWIG_FILE_WITH_INIT
+#include "lpRgpu.cuh"
+%}
+
+%include "numpy.i"
+
+%init %{
+import_array();
+%}
+
+
+class lpRgpu{
+	//global parameters
+	int N;
+	int Nspan;
+	int Ntheta;int Nrho;
+	int Ns_in;int Ntheta_in;
+	int Nslices;int ni;
+	int Ntheta_cut;
+	int add;
+	int Ntheta_R2C;
+	float* rho;
+
+	//grids storages
+	glgrids* ggs;
+	fwdgrids* fgs;
+	adjgrids* ags;
+	//gpu memory    
+	float* drho;
+	float* dfl;
+	float2* dflc;
+	cudaArray* dfla;
+	cufftHandle plan_forward;
+	cufftHandle plan_inverse;
+	cufftHandle plan_f_forward;
+	cufftHandle plan_f_inverse;
+	//fwd
+	float2* fZfwd;
+	float2* dfZfwd;
+	cudaArray* dfa;
+	float* dR;
+	float* dtmpf;
+
+	//adj
+	float2* fZadj;
+	float2* dfZadj;
+	float* dtmpR;
+	cudaArray* dRa;
+	float* df;
+
+	//filter
+	int osfilter;
+	float* dfilter;
+	float* dRt;float2* dRc;
+	//EM
+	float* dfit,*dgit, *dRae, *dcir, *dfst, *dRaeit;
+	cudaError_t err;
+	
+	bool fwd_init,adj_init,filter_init;
+public:
+	//void callErr(const char* err);
+	lpRgpu(char* file_glparams);
+	~lpRgpu();
+	void printGlobalParameters();
+	void printFwdParameters();
+	void printAdjParameters();
+	void readGlobalParameters(char* file_params);
+	void readFwdParameters(char* file_params);
+	void readAdjParameters(char* file_params);
+//	void deleteGlobalParameters();
+	void printCurrentGPUMemory(const char* str = 0);
+	void initFwd(char* params);
+	void initAdj(char* params);
+	void initEM(char* file_fwdparams,char* file_adjparams,float* Rae,float* fst, float* cir);
+
+	void deleteFwd();
+	void deleteAdj();
+	void deleteEM();
+
+	void prefilter2D(float *df, float* dtmpf,uint width, uint height);
+	void execFwd();
+	void execAdj();
+%apply (float* INPLACE_ARRAY1, int DIM1) {(float* R, int m)};
+%apply (float* IN_ARRAY1, int DIM1) {(float* f, int n)};
+	void execFwdMany(float* R,int m,float* f, int n);
+%clear (float* R, int m);
+%clear (float* f, int n);
+
+%apply (float* IN_ARRAY1, int DIM1) {(float* R, int m)};
+%apply (float* INPLACE_ARRAY1, int DIM1) {(float* f, int n)};
+	void execAdjMany(float* f,int n,float* R, int m);
+%clear (float* R, int m);
+%clear (float* f, int n);
+	void execEM(float* f,float* R,int Niter);
+%apply (float* IN_ARRAY1, int DIM1) {(float* filter, int n)};
+	void setFilter(float* filter, int n);
+%clear (float* filter, int n);
+
+	void applyFilter(float* res, float* R);
+	void delFilter();
+
+	void get_sizes(size_t* sizes);
+//modifications for timing
+	void execAdjTiming();
+	void execAdjManyTiming(float* f,float* R);
+};
