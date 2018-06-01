@@ -22,3 +22,4 @@ e.g. export CUDAHOME=/usr/local/cuda-8.0/
 TESTS
 
 See the jupyter notebook "hypRadon.ipynb"
+jupyter notebook hypRadon.ipynb
