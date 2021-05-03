@@ -1,7 +1,6 @@
 HypLpRadon
 
 
-
 OVERVIEW
 
 Evaluation of the hyperbolic Radon transform by using the log-polar-based method, for details see:
@@ -13,10 +12,13 @@ http://www.maths.lth.se/matematiklth/personal/nikitin/papers/hypRadon.pdf
 
 INSTALLATION
 
-To install the package 
-1) set variable $CUDAHOME for cuda home directory if nvcc and its libraries are not installed in the default directory, 
-e.g. export CUDAHOME=/usr/local/cuda-8.0/
-2) run python setup.py build
+conda create -n hypradon install -c conda-forge scikit-build swig notebook matplotlib
+
+conda activate hypradon
+
+cd hypLpRadon
+
+python setup.py install
 
 
 TESTS

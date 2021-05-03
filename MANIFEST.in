@@ -1,3 +1,5 @@
-include src/*cuh
-include src/*.i
-include README
+include README.md
+include LICENSE
+global-exclude *.py[co]
+global-exclude *.i
+global-exclude *.cpp

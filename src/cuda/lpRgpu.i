@@ -6,12 +6,12 @@
 #include "lpRgpu.cuh"
 %}
 
+
 %include "numpy.i"
 
 %init %{
 import_array();
 %}
-
 
 class lpRgpu{
 	//global parameters
