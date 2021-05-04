@@ -7,7 +7,7 @@ Evaluation of the hyperbolic Radon transform by using the log-polar-based method
 
 [1] Nikitin, Viktor, Fredrik Andersson, Marcus Carlsson, and Anton Duchkov. "Fast hyperbolic Radon transform represented as
 convolutions in log-polar coordinates." (Accepted to print in 'Computers and Geosciences') 
-http://www.maths.lth.se/matematiklth/personal/nikitin/papers/hypRadon.pdf
+https://www.sciencedirect.com/science/article/pii/S0098300417304806
 
 
 INSTALLATION
