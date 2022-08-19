@@ -102,7 +102,7 @@ void lpRgpu::fwd(float* out, int os1, int os2, float* in, int is1, int is2)
 
 	int MBS31,MBS32,MBS33; MBS31=16;MBS32=16;MBS33=4;
 	dim3 dimBlock(MBS31,MBS32,MBS33);	
-	int MBS31g,MBS32g,MBS33g; MBS31g=4;MBS32g=4;MBS33g=64;
+	int MBS31g,MBS32g,MBS33g; MBS31g=8;MBS32g=8;MBS33g=8;
 	dim3 dimBlockg(MBS31g,MBS32g,MBS33g);	
 	
 	
@@ -140,7 +140,7 @@ void lpRgpu::adj(float* out, int os1, int os2, float* in, int is1, int is2)
 
 	int MBS31,MBS32,MBS33; MBS31=16;MBS32=16;MBS33=4;
 	dim3 dimBlock(MBS31,MBS32,MBS33);	
-	int MBS31g,MBS32g,MBS33g; MBS31g=4;MBS32g=4;MBS33g=64;
+	int MBS31g,MBS32g,MBS33g; MBS31g=8;MBS32g=8;MBS33g=8;
 	dim3 dimBlockg(MBS31g,MBS32g,MBS33g);	
 
 	//mul cos
