@@ -12,7 +12,7 @@ https://www.sciencedirect.com/science/article/pii/S0098300417304806
 
 INSTALLATION
 
-conda create -n hypradon install -c conda-forge scikit-build swig notebook matplotlib
+conda create -n hypradon -c conda-forge scikit-build swig notebook matplotlib
 
 conda activate hypradon
 
